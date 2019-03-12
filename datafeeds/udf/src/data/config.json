@@ -1,0 +1,33 @@
+{
+    "supports_search": true,
+    "supports_group_request": false,
+    "supports_marks": false,
+    "supports_timescale_marks": false,
+    "supports_time": false,
+    "exchanges": [
+        
+    ],
+    "symbols_types": [
+        {
+            "name": "All types",
+            "value": ""
+        },
+        {
+            "name": "Stock",
+            "value": "stock"
+        },
+        {
+            "name": "Index",
+            "value": "index"
+        }
+    ],
+    "supported_resolutions": [
+        "D",
+        "2D",
+        "3D",
+        "W",
+        "3W",
+        "M",
+        "6M"
+    ]
+}
