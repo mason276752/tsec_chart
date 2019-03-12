@@ -1,1 +1,1 @@
-https://lursun.github.io/tsec_chart
+go to https://lursun.github.io/tsec_chart
