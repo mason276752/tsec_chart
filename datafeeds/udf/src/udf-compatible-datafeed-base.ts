@@ -236,7 +236,7 @@ export class UDFCompatibleDatafeedBase implements IExternalDatafeed, IDatafeedQu
 	}
 
 	public searchSymbols(userInput: string, exchange: string, symbolType: string, onResult: SearchSymbolsCallback): void {
-		if (this._configuration.supports_search && userInput.length > 2) {
+		if (this._configuration.supports_search) {
 			// const params: RequestParams = {
 			// 	limit: Constants.SearchItemsLimit,
 			// 	query: userInput.toUpperCase(),
@@ -259,8 +259,12 @@ export class UDFCompatibleDatafeedBase implements IExternalDatafeed, IDatafeedQu
 			// 		logMessage(`UdfCompatibleDatafeed: Search symbols for '${userInput}' failed. Error=${getErrorMessage(reason)}`);
 			// 		onResult([]);
 			// 	});
-			let response = search.filter((v: any) => v.symbol.indexOf(userInput) >= 0);
-			onResult(response);
+			if (userInput.length > 2) {
+				let response = search.filter((v: any) => v.symbol.indexOf(userInput) >= 0);
+				onResult(response);
+			}else{
+				onResult([])
+			}
 		} else {
 			if (this._symbolsStorage === null) {
 				throw new Error('UdfCompatibleDatafeed: inconsistent configuration (symbols storage)');
@@ -312,17 +316,17 @@ export class UDFCompatibleDatafeedBase implements IExternalDatafeed, IDatafeedQu
 				"description": symbolName,
 				"type": "stock",
 				"supported_resolutions": [
-				  "D",
-				  "2D",
-				  "3D",
-				  "W",
-				  "3W",
-				  "M",
-				  "6M"
+					"D",
+					"2D",
+					"3D",
+					"W",
+					"3W",
+					"M",
+					"6M"
 				],
 				"pricescale": 100,
 				"ticker": symbolName
-			  }))
+			}))
 			// this._send<ResolveSymbolResponse | UdfErrorResponse>('symbols', params)
 			// 	.then((response: ResolveSymbolResponse | UdfErrorResponse) => {
 			// 		if (response.s !== undefined) {
