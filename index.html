@@ -21,7 +21,7 @@
         results = regex.exec(location.search);
       return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
     }
-    
+
     TradingView.onready(function () {
       var widget = window.tvWidget = new TradingView.widget({
         debug: true,
@@ -50,6 +50,23 @@
         theme: 'Dark',
         loading_screen: { backgroundColor: "#171B2B" }, // 加载时的背景颜色
         // disabled_features: ["left_toolbar", "on"], // 关闭左侧工具栏
+        overrides: {
+          "mainSeriesProperties.candleStyle.upColor": "#d75442",
+          "mainSeriesProperties.candleStyle.downColor": "#6ba583",
+          "mainSeriesProperties.candleStyle.drawWick": true,
+          "mainSeriesProperties.candleStyle.drawBorder": true,
+          "mainSeriesProperties.candleStyle.borderColor": "#378658",
+          "mainSeriesProperties.candleStyle.borderUpColor": "#5b1a13",
+          "mainSeriesProperties.candleStyle.borderDownColor": "#225437",
+          "mainSeriesProperties.candleStyle.wickUpColor": 'rgba( 115, 115, 117, 1)',
+          "mainSeriesProperties.candleStyle.wickDownColor": 'rgba( 115, 115, 117, 1)',
+          "mainSeriesProperties.candleStyle.barColorsOnPrevClose": false,
+        },
+        studies_overrides: {
+          "volume.volume.color.0": "#6ba583",
+          "volume.volume.color.1": "#d75442",
+
+        }
       });
     });
   </script>
