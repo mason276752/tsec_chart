@@ -1,13 +1,12 @@
 const path = require('path');
-
-console.log(__dirname + '/dist')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 module.exports = {
-  mode: 'development',
+  mode: 'production',
   entry: path.join(__dirname, 'src', 'udf-compatible-datafeed.ts'),
-  watch: true,
+  watch: false,
   output: {
     path: __dirname + '/dist',
-    publicPath: '/dist/',
+    publicPath: './datafeeds/udf/dist/',
     filename: "bundle.js",
     chunkFilename: '[name].js',
     library: 'Datafeeds',
@@ -18,30 +17,28 @@ module.exports = {
       test: /.ts?$/,
       include: [
         path.resolve(__dirname, 'src'),
-        
+
       ],
       exclude: [
         path.resolve(__dirname, 'node_modules')
       ],
       loader: 'ts-loader',
     },
-    // {
-    //   loader: 'file-loader',
-    //   // Exclude `js` files to keep "css" loader working as it injects
-    //   // its runtime that would otherwise be processed through "file" loader.
-    //   // Also exclude `html` and `json` extensions so they get processed
-    //   // by webpacks internal loaders.
-    //   exclude: [/\.(js|mjs|jsx|ts|tsx)$/, /\.html$/, /\.json$/],
-    //   options: {
-    //     name: 'static/media/[name].[hash:8].[ext]',
-    //   },
-    // },
-  ]
+    ]
   },
   resolve: {
     extensions: ['.json', '.js', '.ts']
   },
-  devtool: 'source-map',
+  optimization: {
+    minimizer: [
+      new UglifyJsPlugin({
+        uglifyOptions: {
+          compress: true
+        }
+      })
+    ]
+  },
+  // devtool: 'source-map',
   // devServer: {
   //   contentBase: path.join('/dist/'),
   //   inline: true,

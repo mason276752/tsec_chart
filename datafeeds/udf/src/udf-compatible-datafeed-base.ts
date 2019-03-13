@@ -39,7 +39,7 @@ import { QuotesPulseProvider } from './quotes-pulse-provider';
 import { SymbolsStorage } from './symbols-storage';
 import { Requester } from './requester';
 import config from './data/config.json'
-import search from './data/search.json'
+// import search from './data/search.json'
 
 
 export interface UdfCompatibleConfiguration extends DatafeedConfiguration {
@@ -259,12 +259,16 @@ export class UDFCompatibleDatafeedBase implements IExternalDatafeed, IDatafeedQu
 			// 		logMessage(`UdfCompatibleDatafeed: Search symbols for '${userInput}' failed. Error=${getErrorMessage(reason)}`);
 			// 		onResult([]);
 			// 	});
-			if (userInput.length > 2) {
-				let response = search.filter((v: any) => v.symbol.indexOf(userInput) >= 0);
-				onResult(response);
-			}else{
-				onResult([])
-			}
+			import('./data/search.json').then((search: any) => {
+				if (userInput.length > 2) {
+					search.length = Object.keys(search).length - 1;
+					search = (<any>Array).from(search)
+					let response = search.filter((v: any) => v.symbol.indexOf(userInput) >= 0);
+					onResult(response);
+				} else {
+					onResult([])
+				}
+			})
 		} else {
 			if (this._symbolsStorage === null) {
 				throw new Error('UdfCompatibleDatafeed: inconsistent configuration (symbols storage)');

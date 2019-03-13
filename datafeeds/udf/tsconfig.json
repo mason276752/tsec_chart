@@ -8,7 +8,7 @@
 			"es2015.symbol.wellknown",
 			"es5"
 		],
-		"module": "es6",
+		"module": "esnext",
 		"moduleResolution": "node",
 		"noEmitOnError": true,
 		"noFallthroughCasesInSwitch": true,
