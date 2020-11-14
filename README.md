@@ -2,4 +2,4 @@
 
 Github page  : https://louis0723.github.io/tsec_chart
 
-Android: https://lursun.github.io/tsec_chart/mobile_black.html
+Android: https://louis0723.github.io/tsec_chart/mobile_black.html
